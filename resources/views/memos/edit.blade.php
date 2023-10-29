@@ -9,19 +9,20 @@
 </head>
 <body>
     <a href="{{ route('memos.index') }}">戻る</a>
-    <h1>新規登録</h1>
-    <form action="{{ route('memos.store') }}" method="post">
+    <h1>更新</h1>
+    <form action="{{ route('memos.update', $memo) }}" method="post">
         @csrf
+        @method('PATCH')
         <p>
             <label for="title">タイトル</label><br>
-            <input type="text" name="title" id="title">
+            <input type="text" name="title" id="title" value="{{ $memo->title }}">
         </p>
         <p>
             <label for="body">本文</label><br>
-            <textarea name="body" class="body" id="body"></textarea>
+            <textarea name="body" class="body" id="body">{{ $memo->body }}</textarea>
         </p>
 
-        <input type="submit" value="登録">
+        <input type="submit" value="更新">
     </form>
 </body>
 </html>
