@@ -3,11 +3,12 @@
 use function Livewire\Volt\{state};
 use App\Models\Memo;
 
-state(['memos' => fn() => Memo::all()]);
+state(['memos' => fn() => Memo::orderBy('priority', 'desc')->get()]);
 
 $create = function () {
     return redirect()->route('memos.create');
 };
+
 ?>
 
 <div>
@@ -16,7 +17,7 @@ $create = function () {
         @foreach ($memos as $memo)
             <li>
                 <a href="{{ route('memos.show', $memo) }}">
-                    {{ $memo->title }}
+                    {{ $memo->title }} [{{ $memo->priority_text }}]
                 </a>
             </li>
         @endforeach
